@@ -168,12 +168,16 @@ export class MatrixMessageParser {
     }
 
     private async parseLinkContent(opts: IMatrixMessageParserOpts, node: Parser.HTMLElement): Promise<string> {
+        console.log("private async parseLinkContent() -------------------")
         const attrs = node.attributes;
         const content = await this.walkChildNodes(opts, node);
         if (!attrs.href || content === attrs.href) {
             return content;
         }
-        return `[${content}](${attrs.href})`;
+        console.log(content, attrs.href)
+        // return `[${content}](${attrs.href})`;
+        return `[${content}]()`;
+
     }
 
     private async parsePillContent(opts: IMatrixMessageParserOpts, node: Parser.HTMLElement): Promise<string> {
